@@ -10,6 +10,5 @@
     <?php echo "Git User 2"; ?>
     <h1>Hello World</h1>
     <p> helloworl </p>
-    <em>Hello World</em>
 </body>
 </html>
