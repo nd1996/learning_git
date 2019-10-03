@@ -1,0 +1,90 @@
+<script type="text/javascript">
+  jQuery(".camel_case").on('propertychange input', function(e) {
+    var text_message = jQuery(this).val();
+    str = text_message.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+      return letter.toUpperCase();
+    });
+    jQuery(this).val(str);
+  });
+
+  jQuery(".first_capital").on('propertychange input', function(e) {
+    var text_message = jQuery(this).val();
+    str = text_message.toLowerCase().replace(/^[a-z]/g, function(letter) {
+      return letter.toUpperCase();
+    });
+
+    jQuery(this).val(str);
+  });
+
+  jQuery(".only_numeric").on('propertychange input', function(e) {
+    var contact_num = jQuery(this).val();
+    jQuery(this).val(contact_num.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'));
+  });
+</script>
+
+<script>
+	jQuery(".mobile").on('propertychange input', function(e){  
+	var text_message = jQuery(this).val();
+	if(text_message.length<11 || text_message.length>11){
+		jQuery(".phone_error").show();
+		// jQuery(".btnSubmit").attr("disabled", true);
+	}
+	else 
+	{
+		jQuery(".phone_error").hide();
+		// jQuery('.btnSubmit').attr("disabled", false);
+	}
+	});
+
+	jQuery(".telephone").on('propertychange input', function(e){  
+	var text_message = jQuery(this).val();
+	if(text_message.length<11 || text_message.length>11){
+		jQuery(".telephone_error").show();
+		// jQuery(".btnSubmit").attr("disabled", true);
+	}
+	else 
+	{
+		jQuery(".telephone_error").hide();
+		// jQuery('.btnSubmit').attr("disabled", false);
+	}
+	});
+</script>
+
+
+<!-- Mobile -->
+<span style="color:#ff0000; font-size:12px; line-height:0;display:none;" class="phone_error">The mobile number must contain 11 digits.</span>
+
+<!-- Telephone -->
+<span style="color:#ff0000; font-size:12px; line-height:0;display:none;" class="telephone_error">The telephone number must contain 11 digits.</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Spam bot protection
+
+
+
+<input type="email" class="spamchecker" value="info@example.com" style="width:10px;position:absolute;top:0;left:0;opacity:0;">
+
+<script>
+    jQuery("#contactForm").submit(function (e) { 
+        var contacct_number = jQuery(".telephone").val().length;
+        if( contacct_number > 11 || contacct_number < 11){
+            jQuery(".telephone_alert").css("display", "block");
+            e.preventDefault();
+        }
+        if(!(jQuery(".spamchecker").val() == 'info@example.com')){
+            alert("Please refresh your page and try again");
+            e.preventDefault();
+        }
+    });
+</script>
