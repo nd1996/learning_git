@@ -1,0 +1,37 @@
+// add css in funtion.php
+// this is for style.css
+wp_enqueue_style( 'mytheme-style', get_stylesheet_uri() );
+
+// this is for custom css
+// parent css
+wp_enqueue_style ('theme-style', get_template_directory_uri().'/css/style.css'); jquery
+// dependent ( load after parent css )
+wp_enqueue_style ('my-style', get_template_directory_uri().'/css/mystyle.css', array('theme-style'));
+
+
+// child path
+
+get_stylesheet_directory_uri()
+
+// creating thankyou page for contact 7 form
+<script>
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    window.location.href = "https://www.gbs.co.uk/connect-success";
+}, false );
+</script>
+// by testing id
+<script>
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+  if ( 8440 === event.detail.contactFormId ) {
+    location = 'http://www.pearlchemistgroup.co.uk/';
+  }
+  if ( 6 === event.detail.contactFormId ) {
+    location = 'http://www.pearlchemistgroup.co.uk/book-an-visit-to-pharmacy';
+  }
+}, false );
+</script>
+
+
+// to run short code in php file
+do_shortcode( string $content, bool $ignore_html = false )
+<?php echo do_shortcode('[lgx-carousel]'); ?>

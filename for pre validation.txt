@@ -1,0 +1,149 @@
+
+'maxlength'	=> 11,
+	'minlength'	=> 11,
+	'required' => 'required',
+
+// class to add  
+telephone
+mobile
+
+btnSubmit
+
+
+// telephone
+
+<span style="color:#ff0000; font-size:12px; line-height:0;display:none;" class="telephone_error">The telephone number must contain 11 digits.</span>
+// mobile ..
+<span style="color:#ff0000; font-size:12px; line-height:0;display:none;" class="phone_error">The mobile number must contain 11 digits.</span>
+
+
+
+
+// formsubmit
+var tele = $(".telephone").val();
+	if(tele.length != 11){
+		flag = 1;
+}
+
+var mobi = $(".mobile").val();
+	if(mobi.length != 11){
+		flag = 1;
+}
+
+
+// footer
+
+<script>
+	jQuery(".mobile").on('propertychange input', function(e){  
+	var text_message = jQuery(this).val();
+	if(text_message.length<11 || text_message.length>11){
+		jQuery(".phone_error").show();
+		// jQuery(".btnSubmit").attr("disabled", true);
+	}
+	else 
+	{
+		jQuery(".phone_error").hide();
+		// jQuery('.btnSubmit').attr("disabled", false);
+	}
+	});
+
+	jQuery(".telephone").on('propertychange input', function(e){  
+	var text_message = jQuery(this).val();
+	if(text_message.length<11 || text_message.length>11){
+		jQuery(".telephone_error").show();
+		// jQuery(".btnSubmit").attr("disabled", true);
+	}
+	else 
+	{
+		jQuery(".telephone_error").hide();
+		// jQuery('.btnSubmit').attr("disabled", false);
+	}
+	});
+</script>
+
+
+
+
+
+
+
+// password
+
+<span style="color:#ff0000; font-size:12px; line-height:0;display:none;" class="my_pass_varification_error">Password atleast contain one letter, one digit , one special character and more then or equal to 8 character</span>
+
+<script>
+	$(".password-eye").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  	var input = $(".toggle-password");
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+/* Password contain 8-16 char */
+
+jQuery(".my_pass_varification").on('propertychange input', function(e){  
+	
+	var text_pass = jQuery(this).val();
+	if(my_pass_varification(text_pass)){
+		jQuery(".my_pass_varification_error").hide();
+	}
+	else 
+	{
+		jQuery(".my_pass_varification_error").show();
+	}
+	console.log(my_pass_varification(text_pass)+text_pass);
+});
+
+function my_pass_varification(str){
+	var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+	if(regularExpression.test(str)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+// for contact form it include space
+jQuery(".contact_only_alph").on('propertychange input', function(e){
+   var contact_num = jQuery(this).val();
+   jQuery(this).val(contact_num.replace(/[^A-Za-z\s]/g, '').replace(/(\..*)\./g, '$1'));
+});
+// for register form
+jQuery(".only_alph").on('propertychange input', function(e){
+   var contact_num = jQuery(this).val();
+   jQuery(this).val(contact_num.replace(/[^A-Za-z]/g, '').replace(/(\..*)\./g, '$1'));
+});
+</script>
+
+
+// print out particular div
+
+<h2>Hello Nilesh</h2>
+<div id="printableArea">
+      <h1>Print me</h1>
+</div>
+
+<input type="button" onclick="printDiv('printableArea')" value="print a div!" />
+
+<script>
+	function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+window.addEventListener("afterprint", function(event) { 
+  setTimeout(function(){ 
+  	document.getElementById('printableArea').style.display = "none";
+  }, 100)
+  
+});
+</script>

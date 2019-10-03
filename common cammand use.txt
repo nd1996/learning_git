@@ -1,0 +1,200 @@
+// SSH
+
+ssh chemistc@82.147.14.2 -p 2223
+Xh=zOjPBUr&C
+
+ssh pharmacy@82.147.12.196 -p 2223
+0!4uo{vf[w1=
+
+ssh mypharma@185.53.174.251 -p 2223
+w4%3CDTjSQpS
+
+ssh dispensi@185.53.174.186 -p 2223
+4A%ML3Aqlfs^
+
+
+ssh osterley@185.53.174.231 -p 2223
+#H7&ERi6c?{x
+
+ssh foreverp@185.53.174.231 -p 2223
+P5okPJ#lu^&(
+
+ssh touchwoo@185.53.174.68 -p 2223
+P5okPJ#lu^&(
+FSkaYdQ?OMUY
+
+ssh andrewsp@185.53.174.231 -p 2223
+Xy]jf9sRePNe
+(IWBmoDAYx01
+
+ssh diamondu@185.53.174.154 -p 2223
+!4;R{%nbH~1o
+
+// ssh for siteground
+
+// Online4pharmacy
+eval $(ssh-agent)
+ssh-add ~/.ssh/local.private Password$001
+ssh online4p@77.104.175.108 -p 18765
+
+// Pearlchemist
+eval $(ssh-agent)
+ssh-add ~/.ssh/pearl.private
+ssh pearlche@77.104.133.206 -p 18765
+
+// retail pc
+eval $(ssh-agent)
+ssh-add ~/.ssh/retail123.private
+ssh retail23@77.104.132.138 -p 18765
+
+// ragarfield ncjmenu
+eval $(ssh-agent)
+ssh-add ~/.ssh/ragarfield.private
+ssh ragarfie@146.66.104.112 -p 18765
+
+newcaven
+newcav@@!!12
+
+// site ground
+FTP: 77.104.133.126
+Username: andrews@touchwoodpharmacy.com
+Password: mwV&I*Ep&v7E
+
+// setup local url in local server
+
+// open editor
+vi /etc/httpd/conf/httpd.conf
+
+<VirtualHost 192.168.1.151:80>
+     DocumentRoot /var/www/html/p2mdm2test
+     ServerName local.p2mdm2test.com
+</VirtualHost>
+
+Add to the cart ajax
+http://excellencemagentoblog.com/blog/2011/10/04/magento-add-product-to-cart-ajax/
+
+
+// Link for magento 2 
+http://www.coolryan.com/magento-2/
+
+Mage::getBaseUrl();
+
+php shell/indexer.php reindexall
+
+php -r 'require "app/Mage.php"; Mage::app()->getCacheInstance()->flush();'
+
+$configValue = Mage::getStoreConfig('sectionName/groupName/fieldName');
+
+
+
+// SSH command
+ssh touchwoo @185.53.174.68 -p 2223
+M1AuP0{Mn}c3
+
+// Download Sql database using ssh 
+mysqldump -u chemistc_pc -p chemistc_pearlchemist > hasscon-20190605.sql
+
+mysqldump -u pharmacy_magento -p pharmacy_magento2 > repeat-pc-20190917.sql Password$001
+
+// Upload 
+mysql -u root -p cm < charlottemensah.sql
+
+mysql -u chemistc_pc -p chemistc_pearlchemist < hasscon-by-nilesh-20190718.sql
+
+// replace 
+update core_config_data SET value = REPLACE(value,'http://127.0.0.1/magento227/','http://127.0.0.1/magento227/website/') WHERE value LIKE "%http://127.0.0.1/magento227/%"
+
+in vegrand 
+localhost = localhost:3306
+
+sudo service apache2 restart
+sudo service apache2 start
+sudo service apache2 stop
+
+// uninstall in linux
+sudo apt-get -y autoremove
+dpkg --list
+sudo apt-get --purge remove mysql*
+
+// phpextention
+sudo apt-get install php7.1-gd php7.1-mcrypt php7.1-curl php7.1-intl php7.1-xsl php7.1-mbstring php7.1-openssl php7.1-zip
+
+// SSH command
+grep -r -l ""  *
+find . -name rep*.phtml
+rm -rf mydir
+
+// Download db in cpanel FM
+mysqldump -u root -p mydbscheme > mydbscheme_dump.sql
+mysqldump -u root -p mydbscheme > mydbscheme_dump.sql
+
+// Use for importing database
+mysql -u root -p pcsetup < pc1.sql
+or
+// run mysql to use this command
+mysql> use db_name;
+mysql> SET autocommit=0 ; source the_sql_file.sql ; COMMIT ;
+
+//multiple dir like dir1/dir2/dir3/dir4...
+mkdir -p dir1/dir2/....
+
+# create the configuration file in the "available" section
+echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
+
+# enable it by creating a symlink to it from the "enabled" section
+sudo a2enconf servername
+
+# restart the server
+sudo service apache2 restart
+
+// to solve configtest problem
+sudo a2dismod php7.0
+
+// magento 2 permission
+find . -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
+// magento 1
+find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \;
+
+//Magento 1 flush
+php -r 'require "app/Mage.php"; Mage::app()->getCacheInstance()->flush();'
+
+//this is use to return json value
+$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($data));
+
+// replace all url in core configValue
+update core_config_data SET value = REPLACE(value,'http://127.0.0.1/magento227/','http://127.0.0.1/magento227/website/') WHERE value LIKE "%http://127.0.0.1/magento227/%"
+
+
+// to restart chutiya local system
+apachectl restart
+
+// to start ssh agent 
+ call "%GIT_INSTALL_ROOT%/cmd/start-ssh-agent.cmd"
+
+// to set new url
+vi /etc/httpd/conf/httpd.conf
+
+chkdsk12345678
+
+// ip of localhost
+\\192.168.0.124
+
+
+<VirtualHost 192.168.1.151:80>
+     DocumentRoot /var/www/html/hhpreview.hasscon.co.uk
+     ServerName local.hhpreview-hasscon.com
+</VirtualHost>
+
+// this is use when phpmyadmin not working
+sudo -H gedit /etc/apache2/apache2.conf
+Include /etc/phpmyadmin/apache.conf
+/etc/init.d/apache2 restart
+
+// this is use for resolving css and js
+https://magento.stackexchange.com/questions/97209/magento-2-css-and-javascript-not-loading-from-correct-folder
+
+if(!Mage::getSingleton('customer/session')->isLoggedIn() && (int) $billing['use_for_shipping'] == 1){
+	Mage::helper('checkout/cart')->getQuote()->getShippingAddress()->setData('country_id',$billing['country_id']);
+}else{
+	Mage::helper('checkout/cart')->getQuote()->getShippingAddress()->setData('country_id',$shipping['country_id']);
+}

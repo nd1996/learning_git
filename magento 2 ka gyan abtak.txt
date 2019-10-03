@@ -1,0 +1,169 @@
+Magento to ka Gyan -- by Nilesh
+
+Common thing to use for better environment
+<!-- SB-Name : homepage about block --> // using comment in static block
+<!-- SB-Name : homepage about block --> // using comment in CMS page
+
+// Namespace and it use
+\Magento\Framework\App\Request\Http $request  // this is use to get get and post Request of form in plugins and observer sometion
+\Magento\Checkout\Model\Session $checkoutSession // this is use to get cart seesion like ->getQuote()
+\Magento\Framework\Controller\Result\Redirect $resultRedirect // use for redirect taken from login page
+\Magento\Framework\App\Cache\Manager $cacheManager // use to clean cache progrmically
+\Magento\Catalog\Model\CategoryFactory $categoryFactory, // for catalog collection
+\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory, // for product collection
+\Psr\Logger\LoggerInterface $logger, // to store logger into log file
+
+//Table name use for particural task
+ui_bookmark - table use for soting up grid in backend // Ui component table grid sort order
+
+// About observer
+$observer->getEvent()
+
+// see path of phtml 
+?templatehints=magento
+
+// PHTML
+$this->getRequest()->getFullActionName() == 'catalog_product_view' // use to identify current page 
+// this is use to add any phtml file in any cms page
+{{block class='Magento\\Framework\\View\\Element\\Template' area='frontend' template='Inchoo_Helloworld::order_leavesafeplace.phtml'}} //including email template. 
+// this is use to add any phtml file in any cms page with parameter 
+{{block class="Magento\Framework\View\Element\Template"template="Altravista_Carousel::product/carousel.phtml" cat="3"}} 
+// Add phtml to phtml with parameter
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setKey('dfd')->setTemplate("VendorName_ModuleName::fileName.phtml")->toHtml(); ?>
+
+// current url 
+$currentPageUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+
+// Commands
+setup:di:compile -vvv // will give more information in verbose formate
+php bin/magento msp:security:recaptcha:disable  //  use when disable capcha of login page
+
+// This is cammond for cmd when grep and find not work as expected
+alias find=C:\Users\Owner\Downloads\cmder\vendor\git-for-windows\usr\find.exe $*
+alias curl=C:\Users\Owner\Downloads\cmder\vendor\git-for-windows\mingw64\bin\curl.exe $*
+alias grep=C:\Users\Owner\Downloads\cmder\vendor\git-for-windows\usr\bincurl.exe $*
+
+// For Helper Class Only for quick work
+// Base url with index.php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$storeManager->getStore()->getBaseUrl();
+
+// Base Url without index.php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+
+// this use to get header title
+<referenceBlock name="page.main.title">
+    <action method="setPageTitle">
+        <argument translate="true" name="title" xsi:type="string">Edit Account Information</argument>
+    </action>
+</referenceBlock>
+
+// Login last page rediect
+<?php echo $this->getUrl("customer/account/login", array('referer'=>base64_encode($block->getBaseUrl('repeat.html')))); ?>
+
+// this to set cookies
+<script>
+    require([
+        'jquery',
+        'mage/cookies'
+    ], function ($) {
+        let user_allow = 1;
+        let my_value = '';
+        // if user enter direct link into browser than document.referrer return empty string
+        // use to prevent misuse of cookies
+        <?php
+                $referer = $this->getRequest()->getParam('referer');
+             if(!empty($referer)){
+                ?> 
+                    my_value = "<?php echo base64_decode($referer); ?>";
+                    // alert(my_value);
+                <?php
+             }else{
+                ?>
+                    my_value = document.referrer;
+                <?php
+             }
+        ?>
+        if (my_value.trim()) {
+            my_value = my_value.replace(/\/\s*$/, "")+"/";
+        }else{
+            user_allow = 0;
+        }
+        var date = new Date();
+        var minutes = 10;
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        let base_url = "<?= @$block->getBaseUrl(); ?>";
+        // alert(date+"<?= $block->getBaseUrl(); ?>"+document.referrer);
+
+        if(my_value != base_url && user_allow == 1){
+           $.cookie('login_redirect', my_value, { expires: date ,path: '/' }); //Set the cookies
+        }
+    });
+</script>
+
+// best example to change phtml file using layout from module -- forcefully
+<referenceBlock name="customer_form_login">
+    <action method='setTemplate'>
+        <argument name="template" xsi:type="string">Semaio_AdvancedLogin::form/login.phtml</argument>
+    </action>
+</referenceBlock>
+
+// add dynamic content in top of page
+<referenceContainer name="after.body.start">
+    <block class="Bss\InfiniteScroll\Block\InfiniteScroll"  ifconfig="infinitescroll/settings/active" name="bss_infinitescroll" template="Bss_InfiniteScroll::js.phtml"/>
+</referenceContainer>
+
+
+//best to clear cache in magento programically
+public function __construct(
+    \Magento\Framework\App\Cache\Manager $cacheManager
+) {
+    $this->cacheManager = $cacheManager;
+}
+
+private function whereYouNeedToCleanCache()
+{
+    $this->cacheManager->flush($this->cacheManager->getAvailableTypes());
+
+    // or this
+    $this->cacheManager->clean($this->cacheManager->getAvailableTypes());
+}
+
+// make block un-cacheable
+protected function _construct()
+{
+     $this->addData(array(
+        'cache_lifetime' => 0
+     );
+}
+
+// check user login
+protected $_customerSession;
+\Magento\Customer\Model\Session $customerSession,
+$this->_customerSession = $customerSession;
+if (!$this->_customerSession->isLoggedIn()) {
+    $this->_redirect('/customer/account/login/');
+}
+
+// form key
+<?= $block->getBlockHtml('formkey') ?>
+
+// greater then zero
+{required:true,'validate-greater-than-zero':true}
+
+
+// this is use when we are working on layout -- prefer only for hard case
+rm -rf var/di/* var/generation/* var/cache/* var/log/* var/page_cache/* var/session/* var/view_preprocessed/* pub/static/*
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:deploy
+php bin/magento cache:clean
+php bin/magento cache:flush
+
+php72 bin/magento setup:di:compile
+php72 bin/magento setup:static-content:deploy
+php72 bin/magento cache:clean
+php72 bin/magento cache:flush
