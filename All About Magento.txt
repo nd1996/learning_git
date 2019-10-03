@@ -1,0 +1,104 @@
+testing purpose
+
+// current url in magento 1
+$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+
+// magento 1 if calender show undefine length
+<?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml(); ?>
+
+// get current url with hhtp or https
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; 
+
+
+Mage::app()->getStore($storeId)->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
+Mage::app()->getStore(1)->getBaseUrl();
+// check url 
+if (strpos($url, 'youtube') > 0) {}
+
+?tp=1&code=magento
+
+//SSH command
+grep -r -l "" *
+
+// EXTENDS 
+extends Mage_Core_Helper_Abstract
+
+$url = Mage::getConfig()->getNode('web/unsecure/base_url', 'website', $websiteCode);
+
+// Thsi for Getting base url for media folder
+Mage::getBaseDir('media');
+
+give you config base url
+{{config path='web/unsecure/base_url'}}
+
+// redirect in magento 
+
+$this->_redirect('pageurl');
+
+// Calling block content in admin panel
+
+{{block type='core/template' template='customer/prescription/request.phtml'}}
+
+// Block into phtml
+$getpricehtmlblock = Mage::getBlockSingleton('catalog/product');
+
+// Item quantity in cart
+Mage::helper('checkout/cart')->getItemsQty();
+
+// message alert
+Mage::getSingleton('core/session')->addError('Please login for book an appointment');
+
+// Add to the cart
+
+// Call Static block into phtml file
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('')->toHtml(); ?> 
+
+<?php echo $this->getLayout()->createBlock('catalog/product_list_related')->setTemplate('catalog/product/list/related.phtml')->toHtml(); ?>
+
+// this is most powerful code use to display hint in admin setion
+// we have to app/etc/local.xml
+
+	<websites>
+        <admin>
+            <dev>
+                <debug>
+                    <template_hints>1</template_hints>
+                    <template_hints_blocks>1</template_hints_blocks>
+                </debug>
+            </dev>
+        </admin>
+    </websites>
+	
+	// this is query builder in magento 1.9
+	$collection = Mage::getResourceModel('reports/product_collection') 
+                      ->addAttributeToSelect('*')     
+                      ->setStoreId($storeId) 
+                      ->addStoreFilter($storeId)     
+                      ->addAttributeToFilter('visibility', $visibility)
+                      ->addAttributeToFilter('magikfeatured', true) 
+                      ->setOrder('updated_at', 'desc')
+                      ->addAttributeToSelect('status') 
+                      ->setPageSize($productCount);
+					  
+					  
+					  
+	$getconnection = Mage::getModel("custombreadcrumb/custombreadcrumb")->getCollection();
+	$getconnection->getSelect('*');
+	$getconnection->addFieldToFilter("custombreadcrumb_active",0);
+	
+	
+	// set cron tab
+	export PATH="$PATH:/usr/local/bin:/usr/bin:/bin" && /bin/bash /home/chemistc/public_html/hhclients.co.uk/hasscon/cron.sh --mode always
+	
+	PATH=/usr/local/jdk/bin:/usr/local/bin:/usr/bin:/opt/cpanel/composer/bin:/usr/local/bin:/usr/X11R6/bin:/home/chemistc/.local/bin:/home/chemistc/bin
+	
+	requestmedicine.xml
+	
+	
+	77.68.64.16
+	
+	<!-- SB-Name : homepage about block -->
+	
+	htmlspecialchars_decode
+	
+	echo Mage::getSingleton('core/session')->getFormKey()

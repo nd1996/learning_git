@@ -1,0 +1,35 @@
+All About fucking git
+
+// to add remote
+git add remote <remote_name> <git respo url>
+
+//Install git on local system 
+git init // Initialize Git
+
+// check remote respo connetivity
+git remote
+git remote -v //all respo with url get use in pull and push
+
+// git basic
+git add . // Get everything ready to commit
+
+git add <file_name> or <folder_name> // Get custom file ready to commit
+
+git commit -m "Message" // to commit changes
+
+git commit -m "Title" -m "Description..." // with title and description
+
+git commit -am "Message" // add and commit with single command
+
+git rm <file_name> // this will remove custom file
+
+// Unrelated history -- ISSUE
+git pull --allow-unrelated-histories
+
+// to push forcefully
+// The current branch master has no upstream branch
+git push --set-upstream nilesh master
+
+// to remove set-upstream we ca set upstream
+git push -u <remote_name> <remote_branch>
+eg. git push -u nilesh master
