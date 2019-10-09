@@ -3,6 +3,10 @@ testing purpose
 // current url in magento 1
 $currentUrl = Mage::helper('core/url')->getCurrentUrl();
 
+// get path of url
+$url_path = Mage::getSingleton('core/url')->parseUrl($currentUrl);
+echo $url_path->getPath();
+
 // magento 1 if calender show undefine length
 <?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml(); ?>
 
@@ -102,3 +106,37 @@ Mage::getSingleton('core/session')->addError('Please login for book an appointme
 	htmlspecialchars_decode
 	
 	echo Mage::getSingleton('core/session')->getFormKey()
+
+
+	// to set defult folder
+	RewriteBase /
+
+	// redirect to non-www to www url
+
+	RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+	// redirect to http to https
+     RewriteCond %{HTTPS} !=on
+ 	RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+ 	# Use to remove multiple slash issue from url
+	RewriteCond %{THE_REQUEST} \s/+(.*?)/{2,}([^\s]*)
+	RewriteRule ^ %1/%2 [R=302,L,NE]
+
+    // redirect https://domain////aaaa/////bbbb//// to https://domain/aaaa/bbbb
+
+    /**
+	 *  This is for resolving multiple slash issue from url
+	 *  */ 
+	$current_url_checker = Mage::helper('core/url')->getCurrentUrl();
+	$url_path_desc = Mage::getSingleton('core/url')->parseUrl($current_url_checker);
+	$redirect_url_holdder = @$url_path_desc->getPath();
+	$our_url_tester = preg_replace('#/+#','/',$url_path_desc->getPath());
+	 if($redirect_url_holdder != $our_url_tester && $current_url_checker != rtrim(Mage::getBaseUrl(), '/')){
+			?>
+				<script>
+					window.location.href = "<?php echo (preg_replace('#/+#','/',$redirect_url_holdder) == '/')?'/':rtrim(preg_replace('#/+#','/',$redirect_url_holdder), '/'); ?>";
+				</script>
+			<?php
+	 }

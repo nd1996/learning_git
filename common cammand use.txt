@@ -12,12 +12,14 @@ w4%3CDTjSQpS
 ssh dispensi@185.53.174.186 -p 2223
 4A%ML3Aqlfs^
 
+ssh lexpharmacy@82.147.14.105 -p 2223
+;@LJ]DlX1SL(
 
 ssh osterley@185.53.174.231 -p 2223
 #H7&ERi6c?{x
 
 ssh foreverp@185.53.174.231 -p 2223
-P5okPJ#lu^&(
+q0PwN<1k518A62H
 
 ssh touchwoo@185.53.174.68 -p 2223
 P5okPJ#lu^&(
