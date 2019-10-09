@@ -167,3 +167,33 @@ php72 bin/magento setup:di:compile
 php72 bin/magento setup:static-content:deploy
 php72 bin/magento cache:clean
 php72 bin/magento cache:flush
+
+
+// Add bread crumb using layout xml
+<!-- Breadcrumbs -->
+<referenceBlock name="breadcrumbs"> <!-- use for targeting breadcrumbs.phtml file contain var $crumb -->
+    <action method="addCrumb"> <!-- Array for breadcrumb -->
+        <argument name="crumbName" xsi:type="string">home</argument>
+        <argument name="crumbInfo" xsi:type="array">
+            <item name="title" xsi:type="string" translate="true">Home</item>
+            <item name="label" xsi:type="string" translate="true">Home</item>
+            <item name="link" xsi:type="string">{{baseUrl}}</item>
+        </argument>
+    </action>
+    <action method="addCrumb">
+        <argument name="crumbName" xsi:type="string">account</argument>
+        <argument name="crumbInfo" xsi:type="array">
+            <item name="title" xsi:type="string" translate="true">Account</item>
+            <item name="label" xsi:type="string" translate="true">Account</item>
+            <item name="link" xsi:type="string">{{baseUrl}}customer/edit</item>
+        </argument>
+    </action>
+    <action method="addCrumb">
+        <argument name="crumbName" xsi:type="string">needhelp</argument>
+        <argument name="crumbInfo" xsi:type="array">
+            <item name="title" xsi:type="string" translate="true">Need Help?</item>
+            <item name="label" xsi:type="string" translate="true">Need Help?</item>
+            <item name="last" xsi:type="boolean">true</item>
+        </argument>
+    </action>
+</referenceBlock>
