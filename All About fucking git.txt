@@ -33,3 +33,10 @@ git push --set-upstream nilesh master
 // to remove set-upstream we ca set upstream
 git push -u <remote_name> <remote_branch>
 eg. git push -u nilesh master
+
+
+
+// If you want to remove those file with track by Add and commit 
+1. .gitignore  // ignores just files that weren't tracked before
+2. git reset name_of_file  // to remove track 
+3. git rm --cached name_of_file  // remove completely from repository
