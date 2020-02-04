@@ -1,17 +1,22 @@
 Magento to ka Gyan -- by Nilesh
 
+// quick ubuntu command
+sudo chown -R root:root * && sudo chmod -R 777 * && sudo php bin/magento setup:upgrade && sudo php bin/magento setup:static-content:deploy -f && sudo php bin/magento c:f && sudo chown -R root:root * && sudo chmod -R 777 *
+
 Common thing to use for better environment
 <!-- SB-Name : homepage about block --> // using comment in static block
 <!-- SB-Name : homepage about block --> // using comment in CMS page
 
 // Namespace and it use
-\Magento\Framework\App\Request\Http $request  // this is use to get get and post Request of form in plugins and observer sometion
+\Magento\Framework\App\Request\Http $request  // this is use to get get and post Request of form in plugins and observer section
 \Magento\Checkout\Model\Session $checkoutSession // this is use to get cart seesion like ->getQuote()
 \Magento\Framework\Controller\Result\Redirect $resultRedirect // use for redirect taken from login page
 \Magento\Framework\App\Cache\Manager $cacheManager // use to clean cache progrmically
 \Magento\Catalog\Model\CategoryFactory $categoryFactory, // for catalog collection
 \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory, // for product collection
 \Psr\Logger\LoggerInterface $logger, // to store logger into log file
+\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig // for store config
+\Magento\Framework\Session\SessionManager $sessionManager // main session manager
 
 //Table name use for particural task
 ui_bookmark - table use for soting up grid in backend // Ui component table grid sort order
@@ -157,16 +162,14 @@ if (!$this->_customerSession->isLoggedIn()) {
 
 // this is use when we are working on layout -- prefer only for hard case
 rm -rf var/di/* var/generation/* var/cache/* var/log/* var/page_cache/* var/session/* var/view_preprocessed/* pub/static/*
-php bin/magento setup:upgrade
-php bin/magento setup:di:compile
-php bin/magento setup:static-content:deploy
-php bin/magento cache:clean
-php bin/magento cache:flush
+sudo -u nilesh -g nilesh php bin/magento setup:upgrade
+sudo -u nilesh -g nilesh php bin/magento setup:di:compile
+sudo -u nilesh -g nilesh php bin/magento setup:static-content:deploy -f
+sudo -u nilesh -g nilesh php bin/magento cache:clean
+sudo -u nilesh -g nilesh php bin/magento cache:flush
 
-php72 bin/magento setup:di:compile
-php72 bin/magento setup:static-content:deploy
-php72 bin/magento cache:clean
-php72 bin/magento cache:flush
+
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy && php bin/magento cache:clean && php bin/magento cache:flush
 
 
 // Add bread crumb using layout xml
@@ -197,3 +200,134 @@ php72 bin/magento cache:flush
         </argument>
     </action>
 </referenceBlock>
+
+// add custom message for validation
+data-msg-<required like validate-length use in data-validate> ="It should contain only 11 digits."
+
+
+// or onclick function on body
+window.onclick = function(event) {
+  if ($(event.target).is( "#myModal" )) {
+    
+  }
+}
+
+
+// Auto complete product search
+<script>
+                            var outputdiv = jQuery("#selection-ajax");
+                            outputdiv.hide();
+                        jQuery("#autocomplete-search").keyup(function (e) { 
+                            var getProd = jQuery(this).val();
+                            var getCat = jQuery("#getCatId").val();
+                                    // console.log(jQuery(this).val().length);
+                        
+                            if(jQuery(this).val().length >= 2){
+                                jQuery.ajax( {
+                                url: "<?php echo Mage::getBaseUrl(); ?>catalog/autosearch/view?prod="+getProd+"&cat="+getCat,
+                                dataType: "text",
+                                success: function( data ) {
+                                    // console.log(data.length);
+                                    
+                                    if(data.length == 0){
+                                        outputdiv.html(`
+                                            <p>No result found</p>
+                                        `);
+                                        outputdiv.show();
+                                    }else{
+                                        outputdiv.html(``);
+                                        data.split(',').map(function(currentValue) {
+
+                                            outputdiv.append(`<li class="i_choose_you">${currentValue}</li>`);
+                                            
+                                        }); 
+                                        outputdiv.show();
+                                    }
+                                }
+                            });
+                            }else{
+                                outputdiv.html(`
+                                    <p>Please Enter two or more character</p>
+                                `);
+                                outputdiv.show();
+                            }
+                            
+                        });
+
+                        // jQuery(".i_choose_you").click(e => { 
+                        //  e.preventDefault();
+                        //  // jQuery("#autocomplete-search").val(jQuery(this).text());
+                        //  alert("Hello No");
+                        // });
+
+                        jQuery("#selection-ajax").on("click",".i_choose_you", function(){
+                            jQuery("#autocomplete-search").val(jQuery(this).text());
+                            outputdiv.html(``).hide();
+                            // submit form
+                        });
+                </script>
+
+
+// base url in block
+
+public function getBaseUrl()
+{
+    return $this->_storeManager->getStore()->getBaseUrl();
+}
+
+// Install Magento with cmd
+
+sudo bin/magento setup:install --base-url=http://127.0.0.1/magento23/ --db-host=localhost --db-name=magento23 --db-user=root --db-password=123456 --admin-firstname=Nilesh --admin-lastname=Dubey --admin-email=nileshdubey@haartyhanks.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1
+
+//when we install from cmd run in core_config_data
+INSERT INTO core_config_data (path, value) VALUES ('dev/static/sign', 0) ON DUPLICATE KEY UPDATE value = 0;
+
+// smaple data
+sudo php bin/magento sampledata:deploy
+
+// Add static block in cms pages
+{{block class="Magento\\Cms\\Block\\Block" block_id="home-page-block"}}
+
+
+// for yes-no instead of 0-1 in gird model
+<column name="instock">
+    <argument name="data" xsi:type="array">
+        <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+        <item name="config" xsi:type="array">
+            <item name="sortOrder" xsi:type="number">60</item>
+            <item name="filter" xsi:type="string">select</item>
+            <item name="label" translate="true" xsi:type="string">InStock</item>
+            <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+            <item name="dataType" xsi:type="string">select</item>
+            <item name="editor" xsi:type="array">
+                <item name="editorType" xsi:type="string">select</item>
+            </item>
+        </item>
+    </argument>
+</column>
+
+
+// customer login
+if(!Mage::helper('customer')->isLoggedIn()) {
+    Mage::getSingleton('customer/session')
+            ->setBeforeAuthUrl(Mage::helper('core/url')->getCurrentUrl()); 
+    $this->_redirect('customer/account/login');
+}
+
+// For admin - Check if user has permissions to access this controller
+
+protected function _isAllowed()
+{
+    return true;
+}
+
+// Validate form
+ data-mage-init='{"form": {}, "validation": {}}'
+
+// escape html
+$block->escapeHtml();
+
+// Add css in layout
+<css src="Nilesh_Enquiry::css/product_enquiry.css" />
+//to add outer link like cdn
+<css src="Nilesh_Enquiry::product_enquiry.css"  src_type="url" rel="stylesheet" type="text/css"  />

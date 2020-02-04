@@ -139,3 +139,20 @@ Mage::getSingleton('core/session')->addError('Please login for book an appointme
 				</script>
 			<?php
 	 }
+
+	 // make cache free phtml
+	 {{block type="core/template" name="customer_prescriptionlandingpage" template="customer/prescription/prescription.phtml"  cache_lifetime=0  cache_tags="CACHE_TAG_MY_BLOCK" cache_key="my-block"}}
+
+	 // redirect to backpage
+	 $repeat_url = Mage::helper('core/http')->getHttpReferer() ? Mage::helper('core/http')->getHttpReferer()  : Mage::getUrl();
+     Mage::app()->getResponse()->setRedirect($repeat_url);
+
+
+     // if seach stop showing result
+     It looks like one of the modules you tried may have switched the catalog from EAV to flat data which is why you were getting the EAV error. By switching to not use flat data in System->Configuration->Catalog->Frontend the search is now working.
+
+    // set title in layout
+
+<reference name="head">
+    <action method="setTitle"><title>Chickenpox Vaccination Hanwell | Chickenpox Vaccine Ealing - Touchwood Pharmacy</title></action>
+</reference>

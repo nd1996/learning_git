@@ -1,0 +1,21 @@
+
+// Define constant and use
+For most constants used globally across the application, storing them in config files is sufficient. It is also pretty simple
+Create a new file in the config directory. Let's call it constants.php
+In there you have to return an array of config values.
+
+return [
+    'options' => [
+        'option_attachment' => '13',
+        'option_email' => '14',
+        'option_monetery' => '15',
+        'option_ratings' => '16',
+        'option_textarea' => '17',
+    ]
+];
+
+And you can access them as follows
+
+Config::get('constants.options');
+// or if you want a specific one
+Config::get('constants.options.option_attachment');
