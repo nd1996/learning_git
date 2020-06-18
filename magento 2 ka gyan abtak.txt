@@ -331,3 +331,23 @@ $block->escapeHtml();
 <css src="Nilesh_Enquiry::css/product_enquiry.css" />
 //to add outer link like cdn
 <css src="Nilesh_Enquiry::product_enquiry.css"  src_type="url" rel="stylesheet" type="text/css"  />
+
+#####################################################################
+
+https://magescan.com/ - Scaning site
+
+Key Point for every one to be noted:
+
+1. Please do not add php_info() file in file. if you are adding then please remove it (delete it dont be like !info.php - it is still accessible)
+
+2. Please take care of var folder - donot provide 777 permission as magento also not ask us to do so. IMP os report folder.
+
+3. If magento 1.9 then please make shell and Downloadable folder unaccessible.
+
+4. Update with patches.
+
+5. Donot do any modification in vendor files/folder because our changes bring vulnerability and There will be patches conflict and Magento versering is more of patches instead of code.
+
+6. Do not add Readme.md file. use readme.php file if needed.
+
+#######################################################################
