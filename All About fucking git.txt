@@ -38,3 +38,9 @@ eg. git push -u nilesh master
 1. .gitignore  // ignores just files that weren't tracked before
 2. git reset name_of_file  // to remove track 
 3. git rm --cached name_of_file  // remove completely from repository
+
+//Check commit list or History using log
+git log -10 // this will only show the 10 most recent commits.
+git log --oneline // this is a great way to view commit history by displaying the first seven characters of the SHA-1 hash and commit message of the commits on the current branch.
+git log --oneline --graph // this will presents commit history in a ASCII graph displaying the different branches in the repository and their commits.
+git log --oneline --graph --decorate // this will displays the same ASCII graph that is displayed using the --graph modifier, but also includes the branch name(s) for the different commits being displayed.
