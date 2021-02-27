@@ -355,3 +355,53 @@ Key Point for every one to be noted:
 6. Do not add Readme.md file. use readme.php file if needed.
 
 #######################################################################
+
+
+cammand
+
+1. 2FA reset 
+php bin/magento msp:security:tfa:reset nileshdubey google
+
+2. this is added for exportProcessor
+php bin/magento queue:consumers:start exportProcessor
+
+3. MySql proper dump
+mysqldump --single-transaction  --no-tablespaces -u online4p_o4p -p online4p_o4p --triggers | sed -e 's/DEFINER[ ]*=[ ]*[^*]*\*/\*/' | gzip > o4p-.`date +"%Y-%m-%d"`.sql.gz
+
+mysql -u online4p_o4p -p online4p_o4p < 
+
+4. Object Manager
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$configLoader = $objectManager->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
+$objectManager->configure($configLoader->load('frontend'));
+
+5. To check module dependencies
+bin/magento info:dependencies:show-modules-circular
+
+6. Find and replace in linux
+find ./ -type f -exec sed -i 's/RegistrationPreference/Theme/g' {} \;
+and for insensitive
+find ./ -type f -exec sed -i 's/string1/string2/gI' {} \;
+
+7. Require js Sample code
+var config = {
+    paths:{
+        "jquery.plugin":"Vendor_Module/jquery.plugin.min"
+    },
+    shim:{
+        'jquery.plugin:{
+            'deps':['jquery']
+        }
+    }
+};
+
+#############################################################################
+
+Site Scanner
+https://sitecheck.sucuri.net/
+https://www.magereport.com/
+http://www.unmaskparasites.com/
+http://webscan.foregenix.com/
+https://github.com/gwillem/magento-malware-scanner/
+https://magescan.com/
+https://www.virustotal.com/
